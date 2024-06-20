@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PracticoMaquina2</string>
+    <string name="informacion">INFORMACIÓN</string>
+    <string name="musica">MÚSICA</string>
+    <string name="salsa">Salsa</string>
+    <string name="pop">Pop</string>
+    <string name="reggae">Reggae</string>
+    <string name="rock">Rock</string>
+</resources>
