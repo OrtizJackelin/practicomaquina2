@@ -9,13 +9,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.claudis.practicomaquina2.modelo.Artista;
 import com.claudis.practicomaquina2.persistencia.ArtistaPersistencia;
 import java.util.List;
+import java.util.Objects;
 
 public class ArtistasActivity extends AppCompatActivity {
     private Integer idArtista1, idArtista2, idArtista3, idArtista4;
     private Integer idAlbumSeleccionadoindex;
     private ImageButton ibArtista1,ibArtista2,ibArtista3,ibArtista4;
     private TextView tvTituloArtistas, tvGenerosInicio, tvGenerosMusica, tvNombreArtista1, tvNombreGenero, tvNombreArtista2,tvNombreArtista3,tvNombreArtista4;
-
+    private Integer idGenero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,38 +59,38 @@ public class ArtistasActivity extends AppCompatActivity {
             }
         });
 
-
-
         Bundle b = this.getIntent().getExtras();
-        Integer idGenero = b.getInt("idGenero", 0);
-        if (idGenero >0) {
-            List<Artista> artistas = ArtistaPersistencia.obtenerPorGenero(idGenero);
-            if (!artistas.isEmpty()) {
-                tvNombreGenero.setText(b.getString("GENERO"));
-                String carpeta = "@drawable/";
-                String uri = carpeta + artistas.get(0).getImagen();
-                int imageResource = getResources().getIdentifier(uri, "", getPackageName());
-                ibArtista1.setImageResource(imageResource);
-                tvNombreArtista1.setText(artistas.get(0).getNombre());
-                idArtista1 = artistas.get(0).getId();
+        if(Objects.nonNull(b)) {
+            idGenero = b.getInt("idGenero", 0);
+            if (idGenero > 0) {
+                List<Artista> artistas = ArtistaPersistencia.obtenerPorGenero(idGenero);
+                if (!artistas.isEmpty()) {
+                    tvNombreGenero.setText(b.getString("GENERO"));
+                    String carpeta = "@drawable/";
+                    String uri = carpeta + artistas.get(0).getImagen();
+                    int imageResource = getResources().getIdentifier(uri, "", getPackageName());
+                    ibArtista1.setImageResource(imageResource);
+                    tvNombreArtista1.setText(artistas.get(0).getNombre());
+                    idArtista1 = artistas.get(0).getId();
 
-                uri = carpeta + artistas.get(1).getImagen();
-                imageResource = getResources().getIdentifier(uri, "", getPackageName());
-                ibArtista2.setImageResource(imageResource);
-                tvNombreArtista2.setText(artistas.get(1).getNombre());
-                idArtista2 = artistas.get(1).getId();
+                    uri = carpeta + artistas.get(1).getImagen();
+                    imageResource = getResources().getIdentifier(uri, "", getPackageName());
+                    ibArtista2.setImageResource(imageResource);
+                    tvNombreArtista2.setText(artistas.get(1).getNombre());
+                    idArtista2 = artistas.get(1).getId();
 
-                uri = carpeta + artistas.get(2).getImagen();
-                imageResource = getResources().getIdentifier(uri, "", getPackageName());
-                ibArtista3.setImageResource(imageResource);
-                tvNombreArtista3.setText(artistas.get(2).getNombre());
-                idArtista3 = artistas.get(2).getId();
+                    uri = carpeta + artistas.get(2).getImagen();
+                    imageResource = getResources().getIdentifier(uri, "", getPackageName());
+                    ibArtista3.setImageResource(imageResource);
+                    tvNombreArtista3.setText(artistas.get(2).getNombre());
+                    idArtista3 = artistas.get(2).getId();
 
-                uri = carpeta + artistas.get(3).getImagen();
-                imageResource = getResources().getIdentifier(uri, "", getPackageName());
-                ibArtista4.setImageResource(imageResource);
-                tvNombreArtista4.setText(artistas.get(3).getNombre());
-                idArtista4 = artistas.get(3).getId();
+                    uri = carpeta + artistas.get(3).getImagen();
+                    imageResource = getResources().getIdentifier(uri, "", getPackageName());
+                    ibArtista4.setImageResource(imageResource);
+                    tvNombreArtista4.setText(artistas.get(3).getNombre());
+                    idArtista4 = artistas.get(3).getId();
+                }
             }
         }
     }
@@ -98,6 +99,7 @@ public class ArtistasActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putString("ARTISTA", tvNombreArtista1.getText().toString());
         b.putInt("idArtista", idArtista1);
+        b.putInt("idGenero",idGenero);
         intent.putExtras(b);
         startActivity(intent);
     }
@@ -107,6 +109,7 @@ public class ArtistasActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putString("ARTISTA", tvNombreArtista2.getText().toString());
         b.putInt("idArtista", idArtista2);
+        b.putInt("idGenero",idGenero);
         intent.putExtras(b);
         startActivity(intent);
     }
@@ -116,6 +119,7 @@ public class ArtistasActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putString("ARTISTA", tvNombreArtista3.getText().toString());
         b.putInt("idArtista", idArtista3);
+        b.putInt("idGenero",idGenero);
         intent.putExtras(b);
         startActivity(intent);
     }
@@ -125,6 +129,7 @@ public class ArtistasActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putString("ARTISTA", tvNombreArtista4.getText().toString());
         b.putInt("idArtista", idArtista4);
+        b.putInt("idGenero",idGenero);
         intent.putExtras(b);
         startActivity(intent);
     }

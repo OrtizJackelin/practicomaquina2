@@ -34,6 +34,7 @@ public class ReproductorActivity  extends AppCompatActivity {
     private final Handler handler = new Handler();
 
     private TextView tvNombreAlbum;
+    private Integer idGenero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,9 @@ public class ReproductorActivity  extends AppCompatActivity {
                 //Creamos el Intent. Esto crea una nueva instancia de la activida principal, por lo que solo se debe finalizar
                 Intent intent = new Intent(ReproductorActivity.this, ArtistasActivity.class);
                 //Iniciamos la nueva actividad
+                Bundle b = new Bundle();
+                b.putInt("idGenero", idGenero);
+                intent.putExtras(b);
                 startActivity(intent);
                 finish();
             }
@@ -83,6 +87,10 @@ public class ReproductorActivity  extends AppCompatActivity {
             public void onClick(View v) {
                 //Creamos el Intent. Esto crea una nueva instancia de la activida principal, por lo que solo se debe finalizar
                 Intent intent = new Intent(ReproductorActivity.this, AlbumesActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("idArtista", artista.getId());
+                b.putInt("idGenero", idGenero);
+                intent.putExtras(b);
                 //Iniciamos la nueva actividad
                 startActivity(intent);
                 finish();
@@ -94,6 +102,7 @@ public class ReproductorActivity  extends AppCompatActivity {
         seekBar = findViewById(R.id.seekBar);
 
         Bundle b = this.getIntent().getExtras();
+        idGenero = b.getInt("idGenero");
         if (Objects.isNull(b)) {
             cerrar();
         }

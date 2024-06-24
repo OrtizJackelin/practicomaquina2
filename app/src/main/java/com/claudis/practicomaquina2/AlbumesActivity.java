@@ -19,6 +19,8 @@ public class AlbumesActivity extends AppCompatActivity {
     private TextView tvNombreAlbum1,tvNombreAlbum2,tvNombreAlbum3,tvNombreAlbum4,tvAlbunesInicio, tvNombreArtista,tvAlbunesGeneros,tvAlbunesArtistas;
     private ImageButton ibAlbun1, ibAlbun2, ibAlbun3,ibAlbun4;
     private Integer idArtista;
+    private Integer idGenero;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,9 @@ public class AlbumesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Creamos el Intent. Esto crea una nueva instancia de la activida principal, por lo que solo se debe finalizar
                 Intent intent = new Intent(AlbumesActivity.this, ArtistasActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("idGenero", idGenero);
+                intent.putExtras(b);
                 //Iniciamos la nueva actividad
                 startActivity(intent);
                 finish();
@@ -71,6 +76,8 @@ public class AlbumesActivity extends AppCompatActivity {
 
         Bundle b = this.getIntent().getExtras();
         this.idArtista = b.getInt("idArtista");
+        idGenero = b.getInt("idGenero");
+
         if (Integer.valueOf(0).equals(idArtista)) {
             cerrar();
         }
@@ -123,6 +130,7 @@ public class AlbumesActivity extends AppCompatActivity {
         Bundle b = new Bundle();
         b.putInt("idArtista", idArtista);
         b.putInt("albumIndex", index);
+        b.putInt("idGenero", idGenero);
         intent.putExtras(b);
         startActivity(intent);
     }
